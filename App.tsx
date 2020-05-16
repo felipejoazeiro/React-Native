@@ -1,19 +1,34 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Fragment} from 'react';
+import { StyleSheet,Dimensions ,ScrollView,Text, Image, FlatList, View, StatusBar, SafeAreaView } from 'react-native';
 
+const largura = Dimensions.get("screen").width;
+const informacoes = [
+  {usuario:"Ricardo"},
+  {usuario:"Marina"},
+  {usuario:"Ricardo"}
+]
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <ScrollView>
+      <FlatList 
+        data={informacoes}
+        renderItem = {({item})=>
+          <Fragment> 
+          <Text>{item.usuario}</Text>
+          <Image 
+            source={require("./res/images/alura.jpg")}
+            style={estilo.image}
+          />  
+        </Fragment>
+        }
+      />
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const estilo = StyleSheet.create({
+  image: {
+    width: largura,
+    height: largura
   },
 });

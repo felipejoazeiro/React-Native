@@ -1,24 +1,33 @@
 import React, {Fragment} from 'react';
-import { StyleSheet,Dimensions ,ScrollView,Text, Image, FlatList, View, StatusBar, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  FlatList, 
+  StatusBar
+}from 'react-native';
+
+import {Cabecalho} from './src/Components/Cabecalho'
+import {Foto} from './src/Components/Foto';
 
 const largura = Dimensions.get("screen").width;
 const informacoes = [
-  {usuario:"Ricardo"},
-  {usuario:"Marina"},
-  {usuario:"Ricardo"}
+  {id:1, usuario:"Ricardo"},
+  {id:2, usuario:"Marina"},
+  {id:3, usuario:"Ricardo"}
 ]
 export default function App() {
-  return (
+  return (  
+    
     <ScrollView>
-      <FlatList 
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
+      <FlatList
         data={informacoes}
+        keyExtractor={(item, index)=>index.toString()}
         renderItem = {({item})=>
           <Fragment> 
-          <Text>{item.usuario}</Text>
-          <Image 
-            source={require("./res/images/alura.jpg")}
-            style={estilo.image}
-          />  
+          <Cabecalho nomeUsuario={item.usuario}/>
+          <Foto />
         </Fragment>
         }
       />
@@ -28,6 +37,7 @@ export default function App() {
 
 const estilo = StyleSheet.create({
   image: {
+    marginTop: 1,
     width: largura,
     height: largura
   },
